@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ZooparkDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AnimalsT">
+    <Key>
+      <PropertyRef Name="IDAnimal" />
+    </Key>
+    <Property Name="IDAnimal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Animal" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Weight" Type="nvarchar" MaxLength="20" />
+    <Property Name="Height" Type="nvarchar" MaxLength="20" />
+    <Property Name="IDInfo" Type="int" />
+  </EntityType>
+  <EntityType Name="Inform">
+    <Key>
+      <PropertyRef Name="IDInfo" />
+    </Key>
+    <Property Name="IDInfo" Type="int" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
+    <Property Name="Header" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TicketT">
+    <Key>
+      <PropertyRef Name="IDTicket" />
+    </Key>
+    <Property Name="IDTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Price" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDInfo" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" MaxLength="255" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ZooparkT">
+    <Key>
+      <PropertyRef Name="IDZoo" />
+    </Key>
+    <Property Name="IDZoo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="text" />
+    <Property Name="IDInfo" Type="int" />
+  </EntityType>
+  <Association Name="FK_Animals_Info">
+    <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+    <End Role="AnimalsT" Type="Self.AnimalsT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inform">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="AnimalsT">
+        <PropertyRef Name="IDInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Info_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Inform" Type="Self.Inform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Inform">
+        <PropertyRef Name="UserLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Info">
+    <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+    <End Role="TicketT" Type="Self.TicketT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inform">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="TicketT">
+        <PropertyRef Name="IDInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zoopark_Info">
+    <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+    <End Role="ZooparkT" Type="Self.ZooparkT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inform">
+        <PropertyRef Name="IDInfo" />
+      </Principal>
+      <Dependent Role="ZooparkT">
+        <PropertyRef Name="IDInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ZooparkDModelContainer">
+    <EntitySet Name="AnimalsT" EntityType="Self.AnimalsT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inform" EntityType="Self.Inform" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketT" EntityType="Self.TicketT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ZooparkT" EntityType="Self.ZooparkT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Animals_Info" Association="Self.FK_Animals_Info">
+      <End Role="Inform" EntitySet="Inform" />
+      <End Role="AnimalsT" EntitySet="AnimalsT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Info_User" Association="Self.FK_Info_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Inform" EntitySet="Inform" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Info" Association="Self.FK_Ticket_Info">
+      <End Role="Inform" EntitySet="Inform" />
+      <End Role="TicketT" EntitySet="TicketT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zoopark_Info" Association="Self.FK_Zoopark_Info">
+      <End Role="Inform" EntitySet="Inform" />
+      <End Role="ZooparkT" EntitySet="ZooparkT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

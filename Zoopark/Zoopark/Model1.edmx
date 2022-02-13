@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ZooparkDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnimalsT">
+          <Key>
+            <PropertyRef Name="IDAnimal" />
+          </Key>
+          <Property Name="IDAnimal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Animal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="20" />
+          <Property Name="Height" Type="nvarchar" MaxLength="20" />
+          <Property Name="IDInfo" Type="int" />
+        </EntityType>
+        <EntityType Name="Inform">
+          <Key>
+            <PropertyRef Name="IDInfo" />
+          </Key>
+          <Property Name="IDInfo" Type="int" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
+          <Property Name="Header" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TicketT">
+          <Key>
+            <PropertyRef Name="IDTicket" />
+          </Key>
+          <Property Name="IDTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDInfo" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ZooparkT">
+          <Key>
+            <PropertyRef Name="IDZoo" />
+          </Key>
+          <Property Name="IDZoo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="text" />
+          <Property Name="IDInfo" Type="int" />
+        </EntityType>
+        <Association Name="FK_Animals_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="AnimalsT" Type="Self.AnimalsT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="AnimalsT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Inform" Type="Self.Inform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Inform">
+              <PropertyRef Name="UserLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="TicketT" Type="Self.TicketT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="TicketT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zoopark_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="ZooparkT" Type="Self.ZooparkT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="ZooparkT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ZooparkDModelContainer">
+          <EntitySet Name="AnimalsT" EntityType="Self.AnimalsT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inform" EntityType="Self.Inform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketT" EntityType="Self.TicketT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZooparkT" EntityType="Self.ZooparkT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Animals_Info" Association="Self.FK_Animals_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="AnimalsT" EntitySet="AnimalsT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_User" Association="Self.FK_Info_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Inform" EntitySet="Inform" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Info" Association="Self.FK_Ticket_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="TicketT" EntitySet="TicketT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zoopark_Info" Association="Self.FK_Zoopark_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="ZooparkT" EntitySet="ZooparkT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZooparkDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnimalsT">
+          <Key>
+            <PropertyRef Name="IDAnimal" />
+          </Key>
+          <Property Name="IDAnimal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Animal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDInfo" Type="Int32" />
+          <NavigationProperty Name="Inform" Relationship="Self.FK_Animals_Info" FromRole="AnimalsT" ToRole="Inform" />
+        </EntityType>
+        <EntityType Name="Inform">
+          <Key>
+            <PropertyRef Name="IDInfo" />
+          </Key>
+          <Property Name="IDInfo" Type="Int32" Nullable="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnimalsT" Relationship="Self.FK_Animals_Info" FromRole="Inform" ToRole="AnimalsT" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Info_User" FromRole="Inform" ToRole="User" />
+          <NavigationProperty Name="TicketT" Relationship="Self.FK_Ticket_Info" FromRole="Inform" ToRole="TicketT" />
+          <NavigationProperty Name="ZooparkT" Relationship="Self.FK_Zoopark_Info" FromRole="Inform" ToRole="ZooparkT" />
+        </EntityType>
+        <EntityType Name="TicketT">
+          <Key>
+            <PropertyRef Name="IDTicket" />
+          </Key>
+          <Property Name="IDTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDInfo" Type="Int32" />
+          <NavigationProperty Name="Inform" Relationship="Self.FK_Ticket_Info" FromRole="TicketT" ToRole="Inform" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inform" Relationship="Self.FK_Info_User" FromRole="User" ToRole="Inform" />
+        </EntityType>
+        <EntityType Name="ZooparkT">
+          <Key>
+            <PropertyRef Name="IDZoo" />
+          </Key>
+          <Property Name="IDZoo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IDInfo" Type="Int32" />
+          <NavigationProperty Name="Inform" Relationship="Self.FK_Zoopark_Info" FromRole="ZooparkT" ToRole="Inform" />
+        </EntityType>
+        <Association Name="FK_Animals_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="AnimalsT" Type="Self.AnimalsT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="AnimalsT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Inform" Type="Self.Inform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Inform">
+              <PropertyRef Name="UserLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="TicketT" Type="Self.TicketT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="TicketT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zoopark_Info">
+          <End Role="Inform" Type="Self.Inform" Multiplicity="0..1" />
+          <End Role="ZooparkT" Type="Self.ZooparkT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inform">
+              <PropertyRef Name="IDInfo" />
+            </Principal>
+            <Dependent Role="ZooparkT">
+              <PropertyRef Name="IDInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZooparkDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnimalsT" EntityType="Self.AnimalsT" />
+          <EntitySet Name="Inform" EntityType="Self.Inform" />
+          <EntitySet Name="TicketT" EntityType="Self.TicketT" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="ZooparkT" EntityType="Self.ZooparkT" />
+          <AssociationSet Name="FK_Animals_Info" Association="Self.FK_Animals_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="AnimalsT" EntitySet="AnimalsT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_User" Association="Self.FK_Info_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Inform" EntitySet="Inform" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Info" Association="Self.FK_Ticket_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="TicketT" EntitySet="TicketT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zoopark_Info" Association="Self.FK_Zoopark_Info">
+            <End Role="Inform" EntitySet="Inform" />
+            <End Role="ZooparkT" EntitySet="ZooparkT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ZooparkDModelContainer" CdmEntityContainer="ZooparkDEntities">
+          <EntitySetMapping Name="AnimalsT">
+            <EntityTypeMapping TypeName="ZooparkDModel.AnimalsT">
+              <MappingFragment StoreEntitySet="AnimalsT">
+                <ScalarProperty Name="IDAnimal" ColumnName="IDAnimal" />
+                <ScalarProperty Name="Animal" ColumnName="Animal" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inform">
+            <EntityTypeMapping TypeName="ZooparkDModel.Inform">
+              <MappingFragment StoreEntitySet="Inform">
+                <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketT">
+            <EntityTypeMapping TypeName="ZooparkDModel.TicketT">
+              <MappingFragment StoreEntitySet="TicketT">
+                <ScalarProperty Name="IDTicket" ColumnName="IDTicket" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ZooparkDModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZooparkT">
+            <EntityTypeMapping TypeName="ZooparkDModel.ZooparkT">
+              <MappingFragment StoreEntitySet="ZooparkT">
+                <ScalarProperty Name="IDZoo" ColumnName="IDZoo" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

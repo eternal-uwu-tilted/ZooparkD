@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ZooparkDModelContainer" CdmEntityContainer="ZooparkDEntities">
+    <EntitySetMapping Name="AnimalsT">
+      <EntityTypeMapping TypeName="ZooparkDModel.AnimalsT">
+        <MappingFragment StoreEntitySet="AnimalsT">
+          <ScalarProperty Name="IDAnimal" ColumnName="IDAnimal" />
+          <ScalarProperty Name="Animal" ColumnName="Animal" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inform">
+      <EntityTypeMapping TypeName="ZooparkDModel.Inform">
+        <MappingFragment StoreEntitySet="Inform">
+          <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketT">
+      <EntityTypeMapping TypeName="ZooparkDModel.TicketT">
+        <MappingFragment StoreEntitySet="TicketT">
+          <ScalarProperty Name="IDTicket" ColumnName="IDTicket" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="ZooparkDModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZooparkT">
+      <EntityTypeMapping TypeName="ZooparkDModel.ZooparkT">
+        <MappingFragment StoreEntitySet="ZooparkT">
+          <ScalarProperty Name="IDZoo" ColumnName="IDZoo" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="IDInfo" ColumnName="IDInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

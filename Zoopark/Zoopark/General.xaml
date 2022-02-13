@@ -1,0 +1,18 @@
+﻿<Window x:Class="Zoopark.General"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zoopark"
+        mc:Ignorable="d"
+        Title="General" Height="450" Width="399.709" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/Image/pavlin.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Button Content="Главная" HorizontalAlignment="Left" Margin="115,90,0,0" VerticalAlignment="Top" Width="159" Height="46" FontFamily="Times New Roman" FontSize="20" Background="#FFD66767" FontWeight="Bold" Click="Button_Click_1"/>
+        <Button Content="Животные" HorizontalAlignment="Left" Margin="115,165,0,0" VerticalAlignment="Top" Width="159" Height="46" FontFamily="Times New Roman" FontSize="20" Background="#FFD66767" FontWeight="Bold" Click="Button_Click_2"/>
+        <Button Content="Билеты" HorizontalAlignment="Left" Margin="115,241,0,0" VerticalAlignment="Top" Width="159" Height="46" FontFamily="Times New Roman" FontSize="20" Background="#FFD66767" FontWeight="Bold" Click="Button_Click_3" />
+        <Button Content="Выход" HorizontalAlignment="Left" Margin="132,345,0,0" VerticalAlignment="Top" Width="124" Height="36" FontFamily="Times New Roman" FontSize="20" Background="#FFD66767" FontWeight="Bold" Click="Button_Click" />
+    </Grid>
+</Window>
